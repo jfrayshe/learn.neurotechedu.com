@@ -38,18 +38,16 @@ when you are performing a specific task.
 
 # How do we extract neural oscillations as a feature of our EEG data?
 
-<img scr="https://github.com/NeuroTechX/eeg-101/blob/dano-dev/EEG101/src/assets/wavedecomposition.gif" alt="This will display an animated GIF" />
-
 As previously mentioned the data obtained by EEF is captured as a function of time, but neural
 oscillations are described in units of frequency. In order to transform the data we must
 employ a Fourier transform.
 
-<Include image of basic equation>
+< img src = "http://68.media.tumblr.com/a0bf5ae6600eea069c21f7237fb0b97b/tumblr_mj34wzLpLc1s5nl47o1_r2_400.gif"/>
 
 The Fourier transform is a highly regarded formula which is the mainstay formula
 for signal processing and signal decompistion.
 
-<img src="eeg-101/EEG101/src/assets/wavedecomposition.gif" alt="This will display an animated GIF" />
+![](https://github.com/NeuroTechX/eeg-101/blob/dano-dev/EEG101/src/assets/wavedecomposition.gif)
 
 The best way to extract neural oscillations is to perform a Fourier transform on
 your preprocessed data and then plot the resulting frequency patterns in the category of
