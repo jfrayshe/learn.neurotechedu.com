@@ -1,7 +1,8 @@
 # What are Neural Oscillations?
 
 Neural oscillations are repetitive, rhythmic synchronized frequency patterns in the central nervous system.
-They occur during activation of large clusters of neurons, though they can occur with a single neuron as well.
+They occur during activation of large clusters of neurons, though they can occur with single neurons as well;
+commercial EEG's can only register the larger clusters. 
 Although the raw data obtained from  electroencephalograms are formatted as a function of time, neural oscillations are visualized in terms of frequency and measured in units of Hertz (Hz); one cycle per second.
 As such the neural clusters generate neural oscillations that can be characterized by the frequency range in which they occur:
 * Alpha waves (7.5-12.5 Hz). Alpha waves also contain a subset of waves known as mu waves, which occur in the same frequency range but are correlated to the motor cortex. (Need examples of that these connect to)
@@ -15,12 +16,12 @@ As such the neural clusters generate neural oscillations that can be characteriz
 # Why do we produce neural oscillations? 
 
 We do not fully understand why our brain produces neural oscillations.
-Some researchers theorize that neural oscillations are nothing more than byproducts of brain activity, indicators of expected brain pattern in response to events of stimulus.
-For example, motion produces prdecitable occurrences of alpha waves (in the mu frequency) in the motor cortex,
+Some researchers theorize that neural oscillations are nothing more than byproducts of brain activity, indicators of expected brain wave patterns in response to events or stimuli.
+For example, physical movement produces predictable occurrences of alpha waves (specifically the mu frequency) in the motor cortex,
 and sleep cycles are characterized by the alternating flux of different neural waves.
-Other researchers have theorized that cetain oscillations, like those that occur in the delta range, are critical to unlocking the mystery of our consciousness. 
+Other researchers have theorized that cetain oscillations, like those that occur in the delta range, are critical to unlocking the mystery of human consciousness. 
 
-# So why do neural oscillations matter?
+# Why do neural oscillations matter?
 
 Neural oscillations are useful in variety of ways.
 From a diagnostic and imaging persepective, they can be used as indicators of specific neurological phenomena such as:
@@ -31,43 +32,57 @@ From a diagnostic and imaging persepective, they can be used as indicators of sp
 * Memory
 * Abnormal neural function, such as epilepsy, and Parkinsons.
 
-Practical applications for extracting neural oscillations using your own BCI could be
+Practical applications for extracting neural oscillations using your own EEG-based BCI could be
 looking at the presence of mu waves during motion, or to check if there is a presence of alpha
 and beta waves during meditation. You may even want to look at all the different waves that occur
 when you are performing a specific task.
 
 # How do we extract neural oscillations as a feature of our EEG data?
 
-As previously mentioned the data obtained by EEF is captured as a function of time, but neural
-oscillations are described in units of frequency. In order to transform the data we must
-employ a Fourier transform.
-
+As previously mentioned the data obtained by EEG is captured as a function of time, but neural
+oscillations are described in units of frequency. In order to convert time data to
+frequency the data must be transformed. The function used to accomplish this is called the Fourier transform
+and the gif below helps visualize how it works:
 ![](https://github.com/jfrayshe/learn.neurotechedu.com/blob/gh-pages/images/neurosc/giphy.gif)
 
-The Fourier transform is a highly regarded formula which is the mainstay formula
-for signal processing and signal decompistion.
+Below is a .gif that adds further insight to how a single signal can contain multiple distinct frequencies:
 
 ![](https://github.com/NeuroTechX/eeg-101/blob/dano-dev/EEG101/src/assets/wavedecomposition.gif)
 
 The best way to extract neural oscillations is to perform a Fourier transform on
 your preprocessed data and then plot the resulting frequency patterns in the category of
 brain waves your interested in seeing. 
-You can further preprocess your data to exlude certain channels, or target specific 
+You can further preprocess your data to exlude certain EEG channels, or target specific 
 frequency ranges to oberseve features of the neural oscillation. 
->See NeuroTechX.edu "Preprocessing" for a detailed look at the preprocessing steps that 
-that can be applied to your data.
+__See NeuroTechX.edu "Preprocessing" for a detailed look at the preprocessing steps that 
+that can be applied to your data.__
 
 Before extracting neural oscillations there are several steps that must be undertaken
 to prepare you data:
+* Importing the relevant modules to your python environment
 * Importing data, reading data, and formatting data
 * Preprocessing
 * Epoching
-* Assemble a classifier (plotting a topomap)
+* Assemble a classifier (for plotting a topomap)
 * and finally, plotting the relevant figure
+
+### Importing the relevant modules
+
+We will not be going into too much detail about what each modules do (just yet). Below are the modules
+I imported for both plotting a topomap and plotting psd
+
+import numpy as np </br>
+import matplotlib.pyplot as plt </br>
+from mne import Epochs, pick_types, find_events </br>
+from mne.channels import read_layout </br>
+from mne.io import concatenate_raws, read_raw_edf </br>
+import mne </br>
+import os.path as op </br>
+from mne.datasets import eegbci </br>
 
 ### Importing, reading, and formatting data
 
-In the below example I have used a dataset created by experimental runs by (reserach reference)
+In the below example I have used a dataset created by experimental runs by [Goldberger et al](https://www.physionet.org/physiobank/database/eegmmidb/)
 so when the data is fetched it will have already underwent some preprocessing which will not be covered in 
 either examples. However in both cases the data will be fetched using the below commands:
 
