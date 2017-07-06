@@ -42,7 +42,7 @@ As previously mentioned the data obtained by EEF is captured as a function of ti
 oscillations are described in units of frequency. In order to transform the data we must
 employ a Fourier transform.
 
-< img src = "http://68.media.tumblr.com/a0bf5ae6600eea069c21f7237fb0b97b/tumblr_mj34wzLpLc1s5nl47o1_r2_400.gif"/>
+![](https://github.com/jfrayshe/learn.neurotechedu.com/blob/gh-pages/images/neurosc/giphy.gif)
 
 The Fourier transform is a highly regarded formula which is the mainstay formula
 for signal processing and signal decompistion.
